@@ -47,7 +47,7 @@ class wpe_securesubmit extends wpsc_merchant {
         $config->versionNumber = '1645';
         $config->developerId = '002914';
         
-        $chargeService = new HpsChargeService($config);
+        $chargeService = new HpsCreditService($config);
 
         $hpsaddress = new HpsAddress();
         $hpsaddress->address = $this->cart_data['billing_address']['address'];
@@ -178,14 +178,6 @@ function form_securesubmit() {
 	</tr>
 	<tr>
 		<td>
-			<label for="HPS_SECRET_KEY_TEST">' . __( 'Test - Secret Key:', 'wpsc' ) . '</label>
-		</td>
-		<td>
-			<input type="password" name="SecureSubmit[HPS_SECRET_KEY_TEST]" id="HPS_SECRET_KEY_TEST" value="' . get_option( "HPS_SECRET_KEY_TEST" ) . '" size="30" size="30" style="width:500px;"/>
-		</td>
-	</tr>
-	<tr>
-		<td>
 			<label for="HPS_PUBLIC_KEY_TEST">' . __( 'Test - Public Key:', 'wpsc' ) . '</label>
 		</td>
 		<td>
@@ -194,10 +186,10 @@ function form_securesubmit() {
 	</tr>
 	<tr>
 		<td>
-			<label for="HPS_SECRET_KEY_LIVE">' . __( 'Live - Secret Key:', 'wpsc' ) . '</label>
+			<label for="HPS_SECRET_KEY_TEST">' . __( 'Test - Secret Key:', 'wpsc' ) . '</label>
 		</td>
 		<td>
-			<input type="password" name="SecureSubmit[HPS_SECRET_KEY_LIVE]" id="HPS_SECRET_KEY_LIVE" value="' . get_option( "HPS_SECRET_KEY_LIVE" ) . '" size="30" size="30" style="width:500px;"/>
+			<input type="password" name="SecureSubmit[HPS_SECRET_KEY_TEST]" id="HPS_SECRET_KEY_TEST" value="' . get_option( "HPS_SECRET_KEY_TEST" ) . '" size="30" size="30" style="width:500px;"/>
 		</td>
 	</tr>
 	<tr>
@@ -207,6 +199,14 @@ function form_securesubmit() {
 		<td>
 			<input type="text" name="SecureSubmit[HPS_PUBLIC_KEY_LIVE]" id="HPS_PUBLIC_KEY_LIVE" value="' . get_option( "HPS_PUBLIC_KEY_LIVE" ) . '" size="30" style="width:500px;"/>
 		</td>
+	</tr>
+	<tr>
+		<td>
+			<label for="HPS_SECRET_KEY_LIVE">' . __( 'Live - Secret Key:', 'wpsc' ) . '</label>
+		</td>
+		<td>
+			<input type="password" name="SecureSubmit[HPS_SECRET_KEY_LIVE]" id="HPS_SECRET_KEY_LIVE" value="' . get_option( "HPS_SECRET_KEY_LIVE" ) . '" size="30" size="30" style="width:500px;"/>
+		</td>
 	</tr>';
 
 	return $output;
@@ -215,7 +215,7 @@ function form_securesubmit() {
 function load_js_files()
 {
 	wp_enqueue_script('jquery');
-	wp_enqueue_script('ssplugin', WP_PLUGIN_URL.'/wp-e-commerce/wpsc-merchants/js/secure.submit-1.0.2.js');
+	wp_enqueue_script('ssplugin', WP_PLUGIN_URL.'/wp-e-commerce/wpsc-merchants/js/jquery.securesubmit.js');
 }
 
 add_action('wp_enqueue_scripts', 'load_js_files');
@@ -240,6 +240,7 @@ if (in_array('wpe_securesubmit', (array)get_option('custom_gateway_options'))) {
 	$output = "<script>
 		jQuery(function ($) {
 			function secureSubmitResponseHandler(response) {
+				$('.wpsc_make_purchase').hide();
 	            var paymentForm = $('.wpsc_checkout_forms');
 	            $('.error').hide();
                 
@@ -267,7 +268,8 @@ if (in_array('wpe_securesubmit', (array)get_option('custom_gateway_options'))) {
                             secureSubmitResponseHandler(response);
                         },
                         error: function(response) {
-                            secureSubmitResponseHandler(response);
+                        	$('.wpsc_make_purchase').show();
+                            alert(response.message);
                         }
                     });
 
