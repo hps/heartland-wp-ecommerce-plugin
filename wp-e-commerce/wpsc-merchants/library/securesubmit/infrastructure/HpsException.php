@@ -1,21 +1,15 @@
 <?php
 class HpsException extends Exception{
-    public  $code           = null,
-            $innerException = null,
-            $responseCode   = null,
-            $responseText   = null;
+    public $innerException = null;
+    public $code = null;
 
-    public function __construct($message, $code=null, $innerException = null){
-        $this->code = $code;
-        $this->innerException = $innerException;
-        parent::__construct($message, 0);
-    }
-
-    public function code(){
-        if($this->code == null){
-            return "unknown";
-        }else{
-            return $this->code;
+    public function __construct($message, $code = null,$innerException = null){
+        $this->message = $message;
+        if ( $code != null ) {
+            $this->code = $code;
+        }
+        if ( $code != null ) {
+            $this->innerException = $innerException;
         }
     }
 }

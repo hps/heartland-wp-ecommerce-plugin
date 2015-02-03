@@ -18,10 +18,11 @@
 
      /**
       * Data Entry Mode indicating whether the check data was manually entered or obtained from a check reader.
+      * Default Value is "DataEntryMode::Manual"
       *
       * @var null
       */
-     public $dataEntryMode  = null;
+     public $dataEntryMode  = DataEntryMode::Manual;
 
      /**
       * Indicates Check Verify. Requires processor setup to utilise. Contact your HPS representative for more information
