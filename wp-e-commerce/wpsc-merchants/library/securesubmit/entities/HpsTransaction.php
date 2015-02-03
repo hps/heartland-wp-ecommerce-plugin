@@ -1,28 +1,28 @@
 <?php
 
 class HpsTransaction {
-    public  $transactionHeader  = null,
-            $transactionId      = null,
-            $responseCode       = null,
-            $responseText       = null,
-            $referenceNumber    = null;
+    public  $transactionId          = null,
+            $clientTransactionId    = null,
+            $responseCode           = null,
+            $responseText           = null,
+            $referenceNumber        = null;
 
-    public function __construct($transactionHeader=null){
-        $this->transactionHeader = $transactionHeader;
-    }
+    protected $_header                = null;
 
-    static public function fromDict($rsp,$txnType){
+    static public function fromDict($rsp,$txnType,$returnType = null){
+
+        $transaction = new $returnType();
+
         // Hydrate the header
-        $transactionHeader = new HpsTransactionHeader();
-        $transactionHeader->gatewayResponseCode = $rsp->Header->GatewayRspCode;
-        $transactionHeader->gatewayResponseMessage = $rsp->Header->GatewayRspMsg;
-        $transactionHeader->responseDt = $rsp->Header->RspDT;
-        $transactionHeader->clientTxnId = (isset($rsp->Header->ClientTxnId) ? $rsp->Header->ClientTxnId : null);
+        $transaction->_header = new HpsTransactionHeader();
+        $transaction->_header->gatewayResponseCode = $rsp->Header->GatewayRspCode;
+        $transaction->_header->gatewayResponseMessage = $rsp->Header->GatewayRspMsg;
+        $transaction->_header->responseDt = $rsp->Header->RspDT;
+        $transaction->_header->clientTxnId = (isset($rsp->Header->ClientTxnId) ? $rsp->Header->ClientTxnId : null);
 
-        $transaction = new HpsTransaction($transactionHeader,$txnType);
         $transaction->transactionId = $rsp->Header->GatewayTxnId;
-        if(isset($rsp->Header->ClientTxnIdSpecified) && $rsp->Header->ClientTxnIdSpecified == true){
-            $transaction->clientTransactionId = $transactionHeader->clientTxnId;
+        if(isset($rsp->Header->ClientTxnId) && $rsp->Header->ClientTxnId != ""){
+            $transaction->clientTransactionId = $rsp->Header->ClientTxnId;
         }
 
         // Hydrate the body
@@ -36,49 +36,57 @@ class HpsTransaction {
         return $transaction;
     }
 
+    public function gatewayResponse()
+    {
+        return (object)array(
+            'code'    => $this->_header->gatewayResponseCode,
+            'message' => $this->_header->gatewayResponseMessage,
+        );
+    }
+
     static public function transactionTypeToServiceName($transactionType){
         switch ($transactionType){
-            case HpsTransactionType::$AUTHORIZE :
-                return HpsItemChoiceTypePosResponseVer10Transaction::$CreditAuth;
+            case HpsTransactionType::Authorize :
+                return HpsItemChoiceTypePosResponseVer10Transaction::CreditAuth;
                 break;
 
-            case HpsTransactionType::$CAPTURE:
-                return HpsItemChoiceTypePosResponseVer10Transaction::$CreditAddToBatch;
+            case HpsTransactionType::Capture:
+                return HpsItemChoiceTypePosResponseVer10Transaction::CreditAddToBatch;
                 break;
 
-            case HpsTransactionType::$CHARGE:
-                return HpsItemChoiceTypePosResponseVer10Transaction::$CreditSale;
+            case HpsTransactionType::Charge:
+                return HpsItemChoiceTypePosResponseVer10Transaction::CreditSale;
                 break;
 
-            case HpsTransactionType::$REFUND:
-                return HpsItemChoiceTypePosResponseVer10Transaction::$CreditReturn;
+            case HpsTransactionType::Refund:
+                return HpsItemChoiceTypePosResponseVer10Transaction::CreditReturn;
                 break;
 
-            case HpsTransactionType::$REVERSE:
-                return HpsItemChoiceTypePosResponseVer10Transaction::$CreditReversal;
+            case HpsTransactionType::Reverse:
+                return HpsItemChoiceTypePosResponseVer10Transaction::CreditReversal;
                 break;
 
-            case HpsTransactionType::$VERIFY:
-                return HpsItemChoiceTypePosResponseVer10Transaction::$CreditAccountVerify;
+            case HpsTransactionType::Verify:
+                return HpsItemChoiceTypePosResponseVer10Transaction::CreditAccountVerify;
                 break;
 
-            case HpsTransactionType::$LIST:
-                return HpsItemChoiceTypePosResponseVer10Transaction::$ReportActivity;
+            case HpsTransactionType::ListTransaction:
+                return HpsItemChoiceTypePosResponseVer10Transaction::ReportActivity;
                 break;
 
-            case HpsTransactionType::$GET:
-                return HpsItemChoiceTypePosResponseVer10Transaction::$ReportTxnDetail;
+            case HpsTransactionType::Get:
+                return HpsItemChoiceTypePosResponseVer10Transaction::ReportTxnDetail;
                 break;
 
-            case HpsTransactionType::$VOID:
-                return HpsItemChoiceTypePosResponseVer10Transaction::$CreditVoid;
+            case HpsTransactionType::Void:
+                return HpsItemChoiceTypePosResponseVer10Transaction::CreditVoid;
                 break;
 
-            case HpsTransactionType::$BATCH_CLOSE:
-                return HpsItemChoiceTypePosResponseVer10Transaction::$BatchClose;
+            case HpsTransactionType::BatchClose:
+                return HpsItemChoiceTypePosResponseVer10Transaction::BatchClose;
                 break;
 
-            case HpsTransactionType::$SECURITY_ERROR:
+            case HpsTransactionType::SecurityError:
                 return "SecurityError";
                 break;
 
@@ -89,44 +97,44 @@ class HpsTransaction {
 
     static public function serviceNameToTransactionType($serviceName){
         switch ($serviceName){
-            case HpsItemChoiceTypePosResponseVer10Transaction::$CreditAuth:
-                return HpsTransactionType::$CAPTURE;
+            case HpsItemChoiceTypePosResponseVer10Transaction::CreditAuth:
+                return HpsTransactionType::Capture;
                 break;
 
-            case HpsItemChoiceTypePosResponseVer10Transaction::$CreditAddToBatch:
-                return HpsTransactionType::$CAPTURE;
+            case HpsItemChoiceTypePosResponseVer10Transaction::CreditAddToBatch:
+                return HpsTransactionType::Capture;
                 break;
 
-            case HpsItemChoiceTypePosResponseVer10Transaction::$CreditSale:
-                return HpsTransactionType::$CHARGE;
+            case HpsItemChoiceTypePosResponseVer10Transaction::CreditSale:
+                return HpsTransactionType::Charge;
                 break;
 
-            case HpsItemChoiceTypePosResponseVer10Transaction::$CreditReturn:
-                return HpsTransactionType::$REFUND;
+            case HpsItemChoiceTypePosResponseVer10Transaction::CreditReturn:
+                return HpsTransactionType::Refund;
                 break;
 
-            case HpsItemChoiceTypePosResponseVer10Transaction::$CreditReversal:
-                return HpsTransactionType::$REVERSE;
+            case HpsItemChoiceTypePosResponseVer10Transaction::CreditReversal:
+                return HpsTransactionType::Reverse;
                 break;
 
-            case HpsItemChoiceTypePosResponseVer10Transaction::$CreditAccountVerify:
-                return HpsTransactionType::$VERIFY;
+            case HpsItemChoiceTypePosResponseVer10Transaction::CreditAccountVerify:
+                return HpsTransactionType::Verify;
                 break;
 
-            case HpsItemChoiceTypePosResponseVer10Transaction::$ReportActivity:
-                return HpsTransactionType::$LIST;
+            case HpsItemChoiceTypePosResponseVer10Transaction::ReportActivity:
+                return HpsTransactionType::ListTransaction;
                 break;
 
-            case HpsItemChoiceTypePosResponseVer10Transaction::$ReportTxnDetail:
-                return HpsTransactionType::$GET;
+            case HpsItemChoiceTypePosResponseVer10Transaction::ReportTxnDetail:
+                return HpsTransactionType::Get;
                 break;
 
-            case HpsItemChoiceTypePosResponseVer10Transaction::$CreditVoid:
-                return HpsTransactionType::$VOID;
+            case HpsItemChoiceTypePosResponseVer10Transaction::CreditVoid:
+                return HpsTransactionType::Void;
                 break;
 
-            case HpsItemChoiceTypePosResponseVer10Transaction::$BatchClose:
-                return HpsTransactionType::$BATCH_CLOSE;
+            case HpsItemChoiceTypePosResponseVer10Transaction::BatchClose:
+                return HpsTransactionType::BatchClose;
                 break;
 
             default:

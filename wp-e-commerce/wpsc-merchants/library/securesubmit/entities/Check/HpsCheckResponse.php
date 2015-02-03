@@ -5,10 +5,10 @@ class HpsCheckResponse extends HpsTransaction{
             $customerId         = null,
             $details            = null;
 
-    public static function fromDict($rsp,$txnType){
+    public static function fromDict($rsp,$txnType,$returnType = 'HpsCheckResponse'){
         $response = $rsp->Transaction->$txnType;
 
-        $sale = parent::fromDict($rsp,$txnType);
+        $sale = parent::fromDict($rsp,$txnType,$returnType);
         $sale->responseCode = (isset($response->RspCode) ? $response->RspCode : null);
         $sale->responseText = (isset($response->RspMessage) ? $response->RspMessage : null);
         $sale->authorizationCode = (isset($response->AuthCode) ? $response->AuthCode : null);
@@ -16,13 +16,12 @@ class HpsCheckResponse extends HpsTransaction{
         if($response->CheckRspInfo){
             $sale->details = array();
 
-            $checkInfo = $response->CheckRspInfo;
-            if(count($checkInfo)>1){
-                foreach ($checkInfo as $details) {
+            if(count($response->CheckRspInfo)>1){
+                foreach ($response->CheckRspInfo as $key=>$details) {
                     $sale->details[] = self::_hydrateRspDetails($details);
                 }
             }else{
-                $sale->details = self::_hydrateRspDetails($checkInfo);
+                $sale->details = self::_hydrateRspDetails($response->CheckRspInfo);
             }
         }
 

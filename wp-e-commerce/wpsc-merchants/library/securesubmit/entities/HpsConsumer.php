@@ -6,4 +6,8 @@ class HpsConsumer {
             $phone          = null,
             $email          = null,
             $address        = null;
+
+    function __construct(){
+        $this->address = new HpsAddress();
+    }
 } 
