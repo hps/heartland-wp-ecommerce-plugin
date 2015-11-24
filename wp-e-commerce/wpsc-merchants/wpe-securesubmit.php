@@ -88,8 +88,6 @@ class wpe_securesubmit extends wpsc_merchant {
                     $details);
             }
 
-            error_log($response);
-
             $this->set_authcode($response->authCode);
             $this->set_transaction_details($response->transactionId, 3);
             $this->go_to_transaction_results($this->cart_data['session_id']);
