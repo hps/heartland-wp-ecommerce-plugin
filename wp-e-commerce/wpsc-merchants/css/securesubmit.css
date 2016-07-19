@@ -1,0 +1,211 @@
+/* ================================= */
+/* TABLE OF CONTENTS                 */
+/* ================================= */
+/* 1.                */
+/* 2.                 */
+/* 3.                */
+/* ================================= */
+
+
+
+/* ================================= */
+/* BASIC TABLE LAYOUT                */
+/* ================================= */
+
+
+.wpsc_gateway_container td {
+  border:1px solid transparent;
+}
+
+.wpsc_gateway_container {
+  background-color:#ffffff !important;
+}
+
+
+.wpsc_checkout_table
+table tr:nth-child(2n-1) td,
+.wpsc_checkout_table
+table tr:nth-child(2n-1) th
+{
+    background-color:#ffffff !important;
+    font-size:12px;
+    background-image:url('../img/ss-shield@2x.png');
+    background-size:372px 45px;
+    height:47px;
+    background-repeat:no-repeat;
+}
+
+
+.wpsc_checkout_table table {
+  border:1px solid transparent;
+  margin:10px 10px 10px 0px;
+}
+
+.wpsc_checkout_table tr {
+   background-color:#ffffff !important;
+}
+
+.wpsc_checkout_table td {
+}
+
+.wpsc_checkout_table .checkout_forms input {
+  border-radius:0px;
+  width:100%;
+}
+
+#securesubmit-card-number:focus {
+  width:100%;
+  box-shadow:none;
+  border:1px solid #3989e3;
+}
+.wpsc_checkout_table .text:focus  !important {
+  width:100%;
+  box-shadow:none;
+  border:1px solid #3989e3;
+}
+
+.wpsc_checkout_table #checkout_page_container input:focus {
+  box-shadow:none;
+  border:1px solid #3989e3;
+}
+
+.wpsc_checkout_table .checkout_forms input:focus {
+  box-shadow:none;
+  border:1px solid #3989e3;
+}
+
+.wpsc_checkout_table
+table tr:nth-child(2n-1) td,
+.wpsc_checkout_table
+table tr:nth-child(2n-1) th {
+  height:70px;
+}
+
+.wpsc_checkout_table
+table tr:nth-child(3n+0) td,
+.wpsc_checkout_table
+table tr:nth-child(3n+0) th {
+    background-color: #ffffff;
+    background-image:none;
+}
+
+/* ================================= */
+/* INPUT FIELD STYLES / CC-TYPE ICONS */
+/* ================================= */
+
+#securesubmit-card-expiry-month {
+  height:45px;
+  margin-bottom:10px;
+  height:42px;
+}
+
+#securesubmit-card-cvc {
+  background-image:url('../img/cvv1.png');
+  background-repeat:no-repeat;
+  float:right;
+  background-position:357px 1px;
+  background-size:51px 30px;
+  height:42px;
+}
+
+#securesubmit-card-number {
+  background-image:url('../img/ss-inputcard-blank@2x.png');
+  background-repeat:no-repeat;
+  float:right;
+  background-position:357px 1px;
+  background-size:51px 30px;
+  text-transform:uppercase;
+  height:42px;
+}
+
+.visa {
+  background-image:url('../img/ss-inputcard-visa@2x.png');
+  background-repeat:no-repeat;
+  float:right;
+  background-position:357px 1px;
+  background-size:51px 30px;
+}
+
+.mc {
+  background-image:url('../img/ss-inputcard-mastercard@2x.png');
+  background-repeat:no-repeat;
+  float:right;
+  background-position:357px 1px;
+  background-size:51px 30px;
+}
+
+.disc {
+  background-image:url('../img/ss-inputcard-discover@2x.png');
+  background-repeat:no-repeat;
+  float:right;
+  background-position:357px 1px;
+  background-size:51px 30px;
+}
+
+.jcb {
+  background-image:url('../img/ss-inputcard-jcb@2x.png');
+  background-repeat:no-repeat;
+  float:right;
+  background-position:357px 1px;
+  background-size:51px 30px;
+}
+
+.amex {
+  background-image:url('../img/ss-inputcard-amex@2x.png');
+  background-repeat:no-repeat;
+  float:right;
+  background-position:357px 1px;
+  background-size:51px 30px;
+}
+
+
+/* ================================= */
+/* MEDIA QUERIES */
+/* ================================= */
+
+@media (max-width:992px) {
+.wpsc_checkout_table table tbody > tr:last-child > td {
+
+  margin-bottom:27px;
+}
+}
+
+@media (max-width:760px) {
+.wpsc_checkout_table td {
+  position:relative;
+
+}
+}
+
+
+
+
+@media only screen and (max-width: 580px) {
+
+  .wpsc_checkout_table td {
+    display:block;
+  }
+  .wpsc_checkout_table
+  table tr:nth-child(2n-1) td,
+  .wpsc_checkout_table
+  table tr:nth-child(2n-1) th
+  {
+      background-color:#ffffff !important;
+      font-size:12px;
+      background-image:url('../img/ss-shield@1x.png');
+      background-size:300px 90px;
+      height:70px;
+      background-repeat:no-repeat;
+  }
+
+  .wpsc_checkout_table
+  table tr:nth-child(3n+0) td,
+  .wpsc_checkout_table
+  table tr:nth-child(3n+0) th {
+      background-color: #ffffff;
+      background-image:none;
+  }
+  .wpsc_checkout_table table tbody > tr:last-child > td {
+    margin-bottom:0px;
+  }
+}

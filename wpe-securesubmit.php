@@ -246,6 +246,7 @@ function load_js_files()
 {
     wp_enqueue_script('jquery');
     wp_enqueue_script('ssplugin', plugins_url('js/jquery.securesubmit.js', __FILE__));
+    wp_enqueue_style('ssstyles', plugins_url('css/securesubmit.css', __FILE__));
 }
 
 add_action('wp_enqueue_scripts', 'load_js_files');
@@ -309,46 +310,28 @@ if (in_array('wpe_securesubmit', (array)get_option('custom_gateway_options'))) {
         });
       </script>
       <tr>
-        <td colspan=2>
-           <h4>Credit Card Details</h4>
-        </td>
+        <theader>
+          <td colspan=2>
+            <h4></h4>
+           </td>
+          </theader>
         </tr>
       <tr>
-        <td style='width:151px'>" . __('Credit Card Number *', 'wpsc') . "</td>
-        <td>
+        <td colspan='2' style='text-transform:uppercase; background-color:#ffffff; font-size:12px; font-family:sans-serif;''>" . __( 'Credit Card Number *', 'wpsc' ) . "</br>
           <input placeholder='Credit Card Number' type='text' id='securesubmit-card-number' class='text'/>
-          <div id='card_number' class='error' style='color:#ff0000;display:none;'>" . __('Please enter a valid card number', 'wpsc') . "</div>
-        </td>
-      </tr>
+          <div id='card_number' class='error' style='color:#ff0000;display:none;'>" . __( 'Please enter a valid card number', 'wpsc' ) . "</div>
+
+      </tr>  </td>
       <tr>
-        <td>" . __('Credit Card Expiry *', 'wpsc') . "</td>
-        <td>
-          <select id='securesubmit-card-expiry-month'>
-          " . $months . "
-          <option value='01'>01</option>
-          <option value='02'>02</option>
-          <option value='03'>03</option>
-          <option value='04'>04</option>
-          <option value='05'>05</option>
-          <option value='06'>06</option>
-          <option value='07'>07</option>
-          <option value='08'>08</option>
-          <option value='09'>09</option>
-          <option value='10'>10</option>
-          <option value='11'>11</option>
-          <option value='12'>12</option>
-          </select>
-          <select class='wpsc_ccBox' id='securesubmit-card-expiry-year'>
-          " . $years . "
-          </select>
-          <div id='card_expMonth' class='error' style='color:#ff0000;display:none;'>" . __('Expiration month is invalid', 'wpsc') . "</div>
-          <div id='card_expYear' class='error' style='color:#ff0000;display:none;'>" . __('Expiration year is invalid', 'wpsc') . "</div>
+        <td style='text-transform:uppercase; font-family:sans-serif;'>" . __( 'Credit Card Expiry *', 'wpsc' ) . "</br>
+          <input id='securesubmit-card-expiry-month' placeholder='MM / YY'>
+          </input>
+          <div id='card_expMonth' class='error' style='color:#ff0000;display:none;'>" . __( 'Expiration month is invalid', 'wpsc' ) . "</div>
+          <div id='card_expYear' class='error' style='color:#ff0000;display:none;'>" . __( 'Expiration year is invalid', 'wpsc' ) . "</div>
         </td>
-      </tr>
-      <tr>
-        <td>" . __('Security Code', 'wpsc') . "</td>
-        <td>
-          <input type='text' size='4' maxlength='4' id='securesubmit-card-cvc'/>
+        <td style='text-transform:uppercase; font-family:sans-serif;'>" . __( 'Security Code', 'wpsc' ) . "</br>
+
+          <input type='text' size='4' maxlength='4' id='securesubmit-card-cvc' placeholder='CVV'/>
           <input type='hidden' id='securesubmitToken' name='securesubmitToken' value='' />
         </td>
       </tr>
