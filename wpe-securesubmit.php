@@ -101,8 +101,8 @@ class wpe_securesubmit extends wpsc_merchant {
         $details->invoiceNumber = $this->cart_data['session_id'];
         $details->memo = 'WP eCommerce Order Id: ' . $this->cart_data['session_id'];
 
-        try{
-            if($processing_mode == 'capture') {
+        try {
+            if ($processing_mode == 'capture') {
                 $response = $chargeService->charge(
                     $this->cart_data['total_price'],
                     'usd',
@@ -120,14 +120,14 @@ class wpe_securesubmit extends wpsc_merchant {
                     $details);
             }
 
-            $this->set_authcode($response->authCode);
+            $this->set_authcode($response->authorizationCode);
             $this->set_transaction_details($response->transactionId, 3);
             $this->go_to_transaction_results($this->cart_data['session_id']);
-        } catch(Exception $e) {
-          $this->set_error_message(__('There was an error posting your payment.', 'wpsc'));
+        } catch (Exception $e) {
+            $this->set_error_message(__('There was an error posting your payment.', 'wpsc'));
             $this->return_to_checkout();
-          exit();
-          break;
+            exit();
+            break;
         }
     }
 }
@@ -245,7 +245,7 @@ function form_securesubmit() {
 function load_js_files()
 {
     wp_enqueue_script('jquery');
-    wp_enqueue_script('ssplugin', WP_PLUGIN_URL.'/wp-e-commerce/wpsc-merchants/js/jquery.securesubmit.js');
+    wp_enqueue_script('ssplugin', plugins_url('js/jquery.securesubmit.js', __FILE__));
 }
 
 add_action('wp_enqueue_scripts', 'load_js_files');
@@ -354,6 +354,6 @@ if (in_array('wpe_securesubmit', (array)get_option('custom_gateway_options'))) {
       </tr>
     ";
 
-    $gateway_checkout_form_fields[$nzshpcrt_gateways[$num]['internalname']] = $output;
+    $gateway_checkout_form_fields[$nzshpcrt_gateways['wpe_securesubmit']['internalname']] = $output;
 
 }
