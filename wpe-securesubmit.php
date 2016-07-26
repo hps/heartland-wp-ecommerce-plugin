@@ -309,34 +309,29 @@ if (in_array('wpe_securesubmit', (array)get_option('custom_gateway_options'))) {
               });
         });
       </script>
-      <tr>
-        <theader>
-          <td colspan=2>
-            <h4></h4>
-           </td>
-          </theader>
-        </tr>
-      <tr>
-        <td colspan='2' style='text-transform:uppercase; background-color:#ffffff; font-size:12px; font-family:sans-serif;''>" . __( 'Credit Card Number *', 'wpsc' ) . "</br>
+
+
+  <div class='ss-head'></div>
+
+    <div class='cc-number'>
+      <div class='cc-input-label'>" . __( 'Credit Card Number *', 'wpsc' ) . "</div>
           <input placeholder='Credit Card Number' type='text' id='securesubmit-card-number' class='text'/>
-          <div id='card_number' class='error' style='color:#ff0000;display:none;'>" . __( 'Please enter a valid card number', 'wpsc' ) . "</div>
+              <div id='card_number' class='error' style='color:#ff0000;display:none;'>" . __( 'Please enter a valid card number', 'wpsc' ) . "</div>
+    </div>
 
-      </tr>  </td>
-      <tr>
-        <td style='text-transform:uppercase; font-family:sans-serif;'>" . __( 'Credit Card Expiry *', 'wpsc' ) . "</br>
-          <input id='securesubmit-card-expiry-month' placeholder='MM / YY'>
-          </input>
-          <div id='card_expMonth' class='error' style='color:#ff0000;display:none;'>" . __( 'Expiration month is invalid', 'wpsc' ) . "</div>
-          <div id='card_expYear' class='error' style='color:#ff0000;display:none;'>" . __( 'Expiration year is invalid', 'wpsc' ) . "</div>
-        </td>
-        <td style='text-transform:uppercase; font-family:sans-serif;'>" . __( 'Security Code', 'wpsc' ) . "</br>
+    <div class='exp-date'>
+      <div class='exp-date-input-label'>" . __( 'Credit Card Expiry *', 'wpsc' ) . "</div>
+          <input id='securesubmit-card-expiry-month' placeholder='MM / YY'/>
+              <div id='card_expMonth' class='error' style='color:#ff0000;display:none;'>" . __( 'Expiration month is invalid', 'wpsc' ) . "</div>
+                <div id='card_expYear' class='error' style='color:#ff0000;display:none;'>" . __( 'Expiration year is invalid', 'wpsc' ) . "</div>
+    </div>
 
+    <div class='cvc'>
+        <div class='cvc-input-label'>" . __( 'Security Code', 'wpsc' ) . "</div>
           <input type='text' size='4' maxlength='4' id='securesubmit-card-cvc' placeholder='CVV'/>
-          <input type='hidden' id='securesubmitToken' name='securesubmitToken' value='' />
-        </td>
-      </tr>
+            <input type='hidden' id='securesubmitToken' name='securesubmitToken' value='' />
+    </div>
+
     ";
-
     $gateway_checkout_form_fields[$nzshpcrt_gateways['wpe_securesubmit']['internalname']] = $output;
-
 }
