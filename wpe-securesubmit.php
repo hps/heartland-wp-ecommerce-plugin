@@ -245,7 +245,7 @@ function form_securesubmit() {
 function load_js_files()
 {
     wp_enqueue_script('jquery');
-    wp_enqueue_script('ssplugin', plugins_url('js/jquery.securesubmit.js', __FILE__));
+    wp_enqueue_script('ssplugin', 'https://api.heartlandportico.com/SecureSubmit.v1/token/2.1/securesubmit.js');
     wp_enqueue_style('ssstyles', plugins_url('css/securesubmit.css', __FILE__));
 }
 
@@ -286,23 +286,32 @@ if (in_array('wpe_securesubmit', (array)get_option('custom_gateway_options'))) {
 
               $(document).ready(function() {
                 var paymentForm = $('.wpsc_checkout_forms');
+                Heartland.Card.attachNumberEvents('#securesubmit-card-number');
+                Heartland.Card.attachExpirationEvents('#securesubmit-card-expiry');
+                Heartland.Card.attachCvvEvents('#securesubmit-card-cvc');
+
                   paymentForm.on('submit', function() {
-                        hps.tokenize({
-                            data: {
-                                public_key: '".$public_key."',
-                                number: jQuery('#securesubmit-card-number').val().replace(/\D/g, ''),
-                                cvc: jQuery('#securesubmit-card-cvc').val(),
-                                exp_month: jQuery('#securesubmit-card-expiry-month').val(),
-                                exp_year: jQuery('#securesubmit-card-expiry-year').val()
-                            },
-                            success: function(response) {
-                                secureSubmitResponseHandler(response);
-                            },
-                            error: function(response) {
-                              $('.wpsc_make_purchase').show();
-                                alert(response.message);
+                        var card       = document.getElementById('securesubmit-card-number');
+                        var expiration = document.getElementById('securesubmit-card-expiry');
+                        var cvv        = document.getElementById('securesubmit-card-cvc');
+
+                        // Parse the expiration date
+                        var split = expiration.value.split(' / ');
+                        var month = split[0] ? split[0].replace(/^\s+|\s+$/g, '') : '';
+                        var year  = split[1] ? split[1].replace(/^\s+|\s+$/g, '') : '';
+
+                        (new Heartland.HPS({
+                            publicKey:    '".$public_key."',
+                            cardNumber:   card.value.replace(/\D/g, ''),
+                            cardCvv:      cvv.value.replace(/\D/g, ''),
+                            cardExpMonth: month.replace(/\D/g, ''),
+                            cardExpYear:  year.replace(/\D/g, ''),
+                            success: secureSubmitResponseHandler,
+                            error: function (resp) {
+                                $('.wpsc_make_purchase').show();
+                                alert(resp.message);
                             }
-                        });
+                        })).tokenize();
 
                       return false;
                   });
@@ -311,26 +320,30 @@ if (in_array('wpe_securesubmit', (array)get_option('custom_gateway_options'))) {
       </script>
 
 
-  <div class='ss-head'></div>
+    <tr>
+        <td>
+            <div class='ss-head'></div>
 
-    <div class='cc-number'>
-      <div class='cc-input-label'>" . __( 'Credit Card Number *', 'wpsc' ) . "</div>
-          <input placeholder='Credit Card Number' type='text' id='securesubmit-card-number' class='text'/>
-              <div id='card_number' class='error' style='color:#ff0000;display:none;'>" . __( 'Please enter a valid card number', 'wpsc' ) . "</div>
-    </div>
+            <div class='cc-number'>
+            <div class='cc-input-label'>" . __( 'Credit Card Number *', 'wpsc' ) . "</div>
+            <input placeholder='Credit Card Number' type='tel' id='securesubmit-card-number' class='text'/>
+            <div id='card_number' class='error' style='color:#ff0000;display:none;'>" . __( 'Please enter a valid card number', 'wpsc' ) . "</div>
+            </div>
 
-    <div class='exp-date'>
-      <div class='exp-date-input-label'>" . __( 'Credit Card Expiry *', 'wpsc' ) . "</div>
-          <input id='securesubmit-card-expiry-month' placeholder='MM / YY'/>
-              <div id='card_expMonth' class='error' style='color:#ff0000;display:none;'>" . __( 'Expiration month is invalid', 'wpsc' ) . "</div>
-                <div id='card_expYear' class='error' style='color:#ff0000;display:none;'>" . __( 'Expiration year is invalid', 'wpsc' ) . "</div>
-    </div>
+            <div class='exp-date'>
+            <div class='exp-date-input-label'>" . __( 'Credit Card Expiry *', 'wpsc' ) . "</div>
+            <input id='securesubmit-card-expiry' placeholder='MM / YY' type='tel' />
+            <div id='card_expMonth' class='error' style='color:#ff0000;display:none;'>" . __( 'Expiration month is invalid', 'wpsc' ) . "</div>
+            <div id='card_expYear' class='error' style='color:#ff0000;display:none;'>" . __( 'Expiration year is invalid', 'wpsc' ) . "</div>
+            </div>
 
-    <div class='cvc'>
-        <div class='cvc-input-label'>" . __( 'Security Code', 'wpsc' ) . "</div>
-          <input type='text' size='4' maxlength='4' id='securesubmit-card-cvc' placeholder='CVV'/>
+            <div class='cvc'>
+            <div class='cvc-input-label'>" . __( 'Security Code', 'wpsc' ) . "</div>
+            <input type='tel' size='4' maxlength='4' id='securesubmit-card-cvc' placeholder='CVV'/>
             <input type='hidden' id='securesubmitToken' name='securesubmitToken' value='' />
-    </div>
+            </div>
+        </td>
+    </tr>
 
     ";
     $gateway_checkout_form_fields[$nzshpcrt_gateways['wpe_securesubmit']['internalname']] = $output;

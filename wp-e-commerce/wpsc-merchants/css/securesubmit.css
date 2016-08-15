@@ -97,7 +97,7 @@
 
 
 
-#securesubmit-card-expiry-month {
+#securesubmit-card-expiry {
   width:90%;
   height:41px;
   border:1px solid #ccc;
@@ -149,39 +149,34 @@
 /* 3. CC-TYPE ICONS                  */
 /* ================================= */
 
-.visa {
-  background-image:#fff url('../img/securesubmit/ss-inputcard-visa@2x.png') center right no-repeat;
+#securesubmit-card-number.card-type-visa {
+  background:#fff url('../img/securesubmit/ss-inputcard-visa@2x.png') center right no-repeat;
   background-clip:padding-box;
-  width:100%;
   background-size:60px 30px;
 }
 
-.mc {
-  background-image:#fff url('../img/securesubmit/ss-inputcard-mastercard@2x.png') center right no-repeat;
+#securesubmit-card-number.card-type-mastercard {
+  background:#fff url('../img/securesubmit/ss-inputcard-mastercard@2x.png') center right no-repeat;
   background-clip:padding-box;
-  width:100%;
   background-size:55px 35px;
 }
 
-.disc {
-  background-image:#fff url('../img/securesubmit/ss-inputcard-discover@2x.png') center right no-repeat;
+#securesubmit-card-number.card-type-discover {
+  background:#fff url('../img/securesubmit/ss-inputcard-discover@2x.png') center right no-repeat;
   background-clip:padding-box;
-  width:100%;
   background-size:51px 30px;
 }
 
-.jcb {
-  background-image:#fff url('../img/securesubmit/ss-inputcard-jcb@2x.png') center right no-repeat;
+#securesubmit-card-number.card-type-jcb {
+  background:#fff url('../img/securesubmit/ss-inputcard-jcb@2x.png') center right no-repeat;
   background-clip:padding-box;
-  width:100%;
   background-size:51px 30px;
 }
 
-.amex {
-  background-image:#fff url('../img/securesubmit/ss-inputcard-amex@2x.png') center right no-repeat;
+#securesubmit-card-number.card-type-amex {
+  background:#fff url('../img/securesubmit/ss-inputcard-amex@2x.png') center right no-repeat;
   background-clip:padding-box;
-  width:100%;
-   background-size:45px 30px;
+  background-size:45px 30px;
 }
 
 
@@ -241,7 +236,7 @@
   float:left;
 }
 
-#securesubmit-card-expiry-month {
+#securesubmit-card-expiry {
   float:left;
 }
 
