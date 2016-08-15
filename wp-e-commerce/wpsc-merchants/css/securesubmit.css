@@ -39,7 +39,7 @@
 {
     background-color:#ffffff !important;
     font-size:12px;
-    background-image:url('../img/ss-shield@2x.png');
+    background-image:url('../img/securesubmit/ss-shield@2x.png');
     background-size:372px 45px;
     height:47px;
     background-repeat:no-repeat;
@@ -70,7 +70,7 @@
 
 
 #securesubmit-card-number {
-  background:#fff url('../img/ss-inputcard-blank@2x.png') center right no-repeat;
+  background:#fff url('../img/securesubmit/ss-inputcard-blank@2x.png') center right no-repeat;
   background-clip:padding-box;
   width:95%;
 
@@ -128,7 +128,7 @@
 }
 
 #securesubmit-card-cvc {
-  background:#fff url('../img/cvv1.png') center right no-repeat;
+  background:#fff url('../img/securesubmit/cvv1.png') center right no-repeat;
   width:90%;
   background-size:56px 35px;
   height:41px;
@@ -150,35 +150,35 @@
 /* ================================= */
 
 .visa {
-  background-image:#fff url('../img/ss-inputcard-visa@2x.png') center right no-repeat;
+  background-image:#fff url('../img/securesubmit/ss-inputcard-visa@2x.png') center right no-repeat;
   background-clip:padding-box;
   width:100%;
   background-size:60px 30px;
 }
 
 .mc {
-  background-image:#fff url('../img/ss-inputcard-mastercard@2x.png') center right no-repeat;
+  background-image:#fff url('../img/securesubmit/ss-inputcard-mastercard@2x.png') center right no-repeat;
   background-clip:padding-box;
   width:100%;
   background-size:55px 35px;
 }
 
 .disc {
-  background-image:#fff url('../img/ss-inputcard-discover@2x.png') center right no-repeat;
+  background-image:#fff url('../img/securesubmit/ss-inputcard-discover@2x.png') center right no-repeat;
   background-clip:padding-box;
   width:100%;
   background-size:51px 30px;
 }
 
 .jcb {
-  background-image:#fff url('../img/ss-inputcard-jcb@2x.png') center right no-repeat;
+  background-image:#fff url('../img/securesubmit/ss-inputcard-jcb@2x.png') center right no-repeat;
   background-clip:padding-box;
   width:100%;
   background-size:51px 30px;
 }
 
 .amex {
-  background-image:#fff url('../img/ss-inputcard-amex@2x.png') center right no-repeat;
+  background-image:#fff url('../img/securesubmit/ss-inputcard-amex@2x.png') center right no-repeat;
   background-clip:padding-box;
   width:100%;
    background-size:45px 30px;
@@ -227,7 +227,7 @@
   .ss-head  {
       background-color:#ffffff !important;
       font-size:12px;
-      background-image:url('../img/ss-shield@1x.png');
+      background-image:url('../img/securesubmit/ss-shield@1x.png');
       background-size:308px 38px;
       height:70px;
       width:300px;
