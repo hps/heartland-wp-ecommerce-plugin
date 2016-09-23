@@ -1,25 +1,57 @@
 <?php
-if ( ! class_exists('HpsServicesConfig' ) ) {
-    require_once(WPSC_FILE_PATH.'/wpsc-merchants/library/securesubmit/Hps.php');
+/*
+Plugin Name: Heartland Secure Submit Gateway for WP eCommerce
+Plugin URI: https://developer.heartlandpaymentsystems.com/SecureSubmit/
+Description: Heartland Payment Systems gateway for WP eCommerce.
+Version: 1.0.0
+Author: Secure Submit
+Author URI: https://developer.heartlandpaymentsystems.com/SecureSubmit/
+*/
+
+// WP eCommerce required
+// Manually require WP eCommerce if we're loaded before it
+$dir = "";
+$arr = get_option('active_plugins');
+foreach ($arr as $v) {
+    if (substr($v, -21) == "/wp-shopping-cart.php") {
+        $dir = substr($v, 0, -21);
+    }
+}
+$wpscMerchantLocation = sprintf(
+    '%s/%s/wpsc-includes/merchant.class.php',
+    WP_PLUGIN_DIR,
+    $dir
+);
+if (!$dir || !file_exists($wpscMerchantLocation)) {
+    return;
+}
+if (!class_exists('wpsc_merchant')) {
+    require_once($wpscMerchantLocation);
 }
 
-$nzshpcrt_gateways[$num]['name'] = __( 'SecureSubmit', 'wpsc' );
-$nzshpcrt_gateways[$num]['api_version'] = 2.0;
-$nzshpcrt_gateways[$num]['image'] = WPSC_URL . '/images/cc.gif';
-$nzshpcrt_gateways[$num]['internalname'] = 'wpe_securesubmit';
-$nzshpcrt_gateways[$num]['class_name'] = 'wpe_securesubmit';
-$nzshpcrt_gateways[$num]['form'] = "form_securesubmit";
-$nzshpcrt_gateways[$num]['submit_function'] = "submit_securesubmit";
-$nzshpcrt_gateways[$num]['is_exclusive'] = true;
-$nzshpcrt_gateways[$num]['payment_type'] = "wpe_securesubmit";
-$nzshpcrt_gateways[$num]['display_name'] = __( 'SecureSubmit', 'wpsc' );
+if (!class_exists('HpsServicesConfig')) {
+    require_once('library/Hps.php');
+}
+
+$nzshpcrt_gateways['wpe_securesubmit'] = array(
+    'name' => __('Secure Submit', 'wpsc'),
+    'api_version' => 2.0,
+    'image' => plugins_url('images/cc.gif', __FILE__),
+    'internalname' => 'wpe_securesubmit',
+    'class_name' => 'wpe_securesubmit',
+    'form' => "form_securesubmit",
+    'submit_function' => "submit_securesubmit",
+    'is_exclusive' => true,
+    'payment_type' => "wpe_securesubmit",
+    'display_name' => __('Secure Submit', 'wpsc'),
+);
 
 $error = '';
 
 /**
- * WP eCommerce SecureSubmit Class
+ * WP eCommerce Secure Submit Class
  *
- * This is the SecureSubmit class, it extends the base merchant class
+ * This is the Secure Submit class, it extends the base merchant class
  *
  * @package wpe_securesubmit
  * @since 3.7.6
@@ -31,9 +63,9 @@ class wpe_securesubmit extends wpsc_merchant {
 
     var $name = '';
 
-    function __construct( $purchase_id = null, $is_receiving = false ) {
-        $this->name = __( 'SecureSubmit', 'wpsc' );
-        parent::__construct( $purchase_id, $is_receiving );
+    function __construct($purchase_id = null, $is_receiving = false) {
+        $this->name = __('SecureSubmit', 'wpsc');
+        parent::__construct($purchase_id, $is_receiving);
     }
 
     function construct_value_array() {
@@ -69,8 +101,8 @@ class wpe_securesubmit extends wpsc_merchant {
         $details->invoiceNumber = $this->cart_data['session_id'];
         $details->memo = 'WP eCommerce Order Id: ' . $this->cart_data['session_id'];
 
-        try{
-            if($processing_mode == 'capture') {
+        try {
+            if ($processing_mode == 'capture') {
                 $response = $chargeService->charge(
                     $this->cart_data['total_price'],
                     'usd',
@@ -88,14 +120,14 @@ class wpe_securesubmit extends wpsc_merchant {
                     $details);
             }
 
-            $this->set_authcode($response->authCode);
+            $this->set_authcode($response->authorizationCode);
             $this->set_transaction_details($response->transactionId, 3);
             $this->go_to_transaction_results($this->cart_data['session_id']);
-        } catch(Exception $e) {
-          $this->set_error_message(__('There was an error posting your payment.', 'wpsc'));
+        } catch (Exception $e) {
+            $this->set_error_message(__('There was an error posting your payment.', 'wpsc'));
             $this->return_to_checkout();
-          exit();
-          break;
+            exit();
+            break;
         }
     }
 }
@@ -103,22 +135,22 @@ class wpe_securesubmit extends wpsc_merchant {
 function submit_securesubmit() {
 
     if (isset($_POST['SecureSubmit']['SECURESUBMIT_MODE']))
-        update_option( 'SECURESUBMIT_MODE', $_POST['SecureSubmit']['SECURESUBMIT_MODE'] );
+        update_option('SECURESUBMIT_MODE', $_POST['SecureSubmit']['SECURESUBMIT_MODE']);
 
     if (isset($_POST['SecureSubmit']['PROCESSING_MODE']))
-        update_option( 'PROCESSING_MODE', $_POST['SecureSubmit']['PROCESSING_MODE'] );
+        update_option('PROCESSING_MODE', $_POST['SecureSubmit']['PROCESSING_MODE']);
 
     if (isset($_POST['SecureSubmit']['HPS_PUBLIC_KEY_LIVE']))
-        update_option( 'HPS_PUBLIC_KEY_LIVE', $_POST['SecureSubmit']['HPS_PUBLIC_KEY_LIVE'] );
+        update_option('HPS_PUBLIC_KEY_LIVE', $_POST['SecureSubmit']['HPS_PUBLIC_KEY_LIVE']);
 
     if (isset($_POST['SecureSubmit']['HPS_SECRET_KEY_LIVE']))
-        update_option( 'HPS_SECRET_KEY_LIVE', $_POST['SecureSubmit']['HPS_SECRET_KEY_LIVE'] );
+        update_option('HPS_SECRET_KEY_LIVE', $_POST['SecureSubmit']['HPS_SECRET_KEY_LIVE']);
 
     if (isset($_POST['SecureSubmit']['HPS_PUBLIC_KEY_TEST']))
-        update_option( 'HPS_PUBLIC_KEY_TEST', $_POST['SecureSubmit']['HPS_PUBLIC_KEY_TEST'] );
+        update_option('HPS_PUBLIC_KEY_TEST', $_POST['SecureSubmit']['HPS_PUBLIC_KEY_TEST']);
 
     if (isset($_POST['SecureSubmit']['HPS_SECRET_KEY_TEST']))
-        update_option( 'HPS_SECRET_KEY_TEST', $_POST['SecureSubmit']['HPS_SECRET_KEY_TEST'] );
+        update_option('HPS_SECRET_KEY_TEST', $_POST['SecureSubmit']['HPS_SECRET_KEY_TEST']);
 
     return true;
 }
@@ -130,12 +162,12 @@ function form_securesubmit() {
     $capture_mode_selected = '';
     $authorize_mode_selected = '';
 
-    if (get_option('SECURESUBMIT_MODE') == "live" )
+    if (get_option('SECURESUBMIT_MODE') == "live")
         $live_mode_selected = 'checked="checked"';
     else
         $test_mode_selected = 'checked="checked"';
 
-    if (get_option('PROCESSING_MODE') == "capture" )
+    if (get_option('PROCESSING_MODE') == "capture")
         $capture_mode_selected = 'checked="checked"';
     else
         $authorize_mode_selected = 'checked="checked"';
@@ -143,7 +175,7 @@ function form_securesubmit() {
     $output = '
       <tr>
         <td>
-          <label>' . __( 'API mode:', 'wpsc' ) . '</label>
+          <label>' . __('API mode:', 'wpsc') . '</label>
         </td>
         <td>
           <label for="securesubmit_test">' . __('Test Mode:', 'wpsc') . '</label>
@@ -155,7 +187,7 @@ function form_securesubmit() {
       </tr>
       <tr>
         <td>
-          <label>' . __( 'Processing Type:', 'wpsc' ) . '</label>
+          <label>' . __('Processing Type:', 'wpsc') . '</label>
         </td>
         <td>
           <label for="securesubmit_capture">' . __('Authorize and Capture', 'wpsc') . '</label>
@@ -176,34 +208,34 @@ function form_securesubmit() {
       </tr>
       <tr>
         <td>
-          <label for="HPS_PUBLIC_KEY_TEST">' . __( 'Test - Public Key:', 'wpsc' ) . '</label>
+          <label for="HPS_PUBLIC_KEY_TEST">' . __('Test - Public Key:', 'wpsc') . '</label>
         </td>
         <td>
-          <input type="text" name="SecureSubmit[HPS_PUBLIC_KEY_TEST]" id="HPS_PUBLIC_KEY_TEST" value="' . get_option( "HPS_PUBLIC_KEY_TEST" ) . '" size="30" size="30" style="width:500px;"/>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label for="HPS_SECRET_KEY_TEST">' . __( 'Test - Secret Key:', 'wpsc' ) . '</label>
-        </td>
-        <td>
-          <input type="password" name="SecureSubmit[HPS_SECRET_KEY_TEST]" id="HPS_SECRET_KEY_TEST" value="' . get_option( "HPS_SECRET_KEY_TEST" ) . '" size="30" size="30" style="width:500px;"/>
+          <input type="text" name="SecureSubmit[HPS_PUBLIC_KEY_TEST]" id="HPS_PUBLIC_KEY_TEST" value="' . get_option("HPS_PUBLIC_KEY_TEST") . '" size="30" size="30" style="width:500px;"/>
         </td>
       </tr>
       <tr>
         <td>
-          <label for="HPS_PUBLIC_KEY_LIVE">' . __( 'Live - Public Key:', 'wpsc' ) . '</label>
+          <label for="HPS_SECRET_KEY_TEST">' . __('Test - Secret Key:', 'wpsc') . '</label>
         </td>
         <td>
-          <input type="text" name="SecureSubmit[HPS_PUBLIC_KEY_LIVE]" id="HPS_PUBLIC_KEY_LIVE" value="' . get_option( "HPS_PUBLIC_KEY_LIVE" ) . '" size="30" style="width:500px;"/>
+          <input type="password" name="SecureSubmit[HPS_SECRET_KEY_TEST]" id="HPS_SECRET_KEY_TEST" value="' . get_option("HPS_SECRET_KEY_TEST") . '" size="30" size="30" style="width:500px;"/>
         </td>
       </tr>
       <tr>
         <td>
-          <label for="HPS_SECRET_KEY_LIVE">' . __( 'Live - Secret Key:', 'wpsc' ) . '</label>
+          <label for="HPS_PUBLIC_KEY_LIVE">' . __('Live - Public Key:', 'wpsc') . '</label>
         </td>
         <td>
-          <input type="password" name="SecureSubmit[HPS_SECRET_KEY_LIVE]" id="HPS_SECRET_KEY_LIVE" value="' . get_option( "HPS_SECRET_KEY_LIVE" ) . '" size="30" size="30" style="width:500px;"/>
+          <input type="text" name="SecureSubmit[HPS_PUBLIC_KEY_LIVE]" id="HPS_PUBLIC_KEY_LIVE" value="' . get_option("HPS_PUBLIC_KEY_LIVE") . '" size="30" style="width:500px;"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="HPS_SECRET_KEY_LIVE">' . __('Live - Secret Key:', 'wpsc') . '</label>
+        </td>
+        <td>
+          <input type="password" name="SecureSubmit[HPS_SECRET_KEY_LIVE]" id="HPS_SECRET_KEY_LIVE" value="' . get_option("HPS_SECRET_KEY_LIVE") . '" size="30" size="30" style="width:500px;"/>
         </td>
       </tr>';
 
@@ -213,7 +245,7 @@ function form_securesubmit() {
 function load_js_files()
 {
     wp_enqueue_script('jquery');
-    wp_enqueue_script('ssplugin', WP_PLUGIN_URL.'/wp-e-commerce/wpsc-merchants/js/jquery.securesubmit.js');
+    wp_enqueue_script('ssplugin', plugins_url('js/jquery.securesubmit.js', __FILE__));
 }
 
 add_action('wp_enqueue_scripts', 'load_js_files');
@@ -223,14 +255,14 @@ $months = '';
 
 if (in_array('wpe_securesubmit', (array)get_option('custom_gateway_options'))) {
     $public_key = '';
-    if ( get_option('SECURESUBMIT_MODE') == "live" )
-        $public_key = get_option( "HPS_PUBLIC_KEY_LIVE" );
+    if (get_option('SECURESUBMIT_MODE') == "live")
+        $public_key = get_option("HPS_PUBLIC_KEY_LIVE");
     else
-        $public_key = get_option( "HPS_PUBLIC_KEY_TEST" );
+        $public_key = get_option("HPS_PUBLIC_KEY_TEST");
 
     $curryear = date('Y');
 
-    for ( $i = 0; $i < 10; $i++ ) {
+    for ($i = 0; $i < 10; $i++) {
         $years .= "<option value='" . $curryear . "'>" . $curryear . "</option>\r\n";
         $curryear++;
     }
@@ -242,7 +274,7 @@ if (in_array('wpe_securesubmit', (array)get_option('custom_gateway_options'))) {
                   var paymentForm = $('.wpsc_checkout_forms');
                   $('.error').hide();
 
-                    if ( response.message ) {
+                    if (response.message) {
                         alert(response.message);
                         return false;
                   } else {
@@ -282,14 +314,14 @@ if (in_array('wpe_securesubmit', (array)get_option('custom_gateway_options'))) {
         </td>
         </tr>
       <tr>
-        <td style='width:151px'>" . __( 'Credit Card Number *', 'wpsc' ) . "</td>
+        <td style='width:151px'>" . __('Credit Card Number *', 'wpsc') . "</td>
         <td>
           <input placeholder='Credit Card Number' type='text' id='securesubmit-card-number' class='text'/>
-          <div id='card_number' class='error' style='color:#ff0000;display:none;'>" . __( 'Please enter a valid card number', 'wpsc' ) . "</div>
+          <div id='card_number' class='error' style='color:#ff0000;display:none;'>" . __('Please enter a valid card number', 'wpsc') . "</div>
         </td>
       </tr>
       <tr>
-        <td>" . __( 'Credit Card Expiry *', 'wpsc' ) . "</td>
+        <td>" . __('Credit Card Expiry *', 'wpsc') . "</td>
         <td>
           <select id='securesubmit-card-expiry-month'>
           " . $months . "
@@ -309,12 +341,12 @@ if (in_array('wpe_securesubmit', (array)get_option('custom_gateway_options'))) {
           <select class='wpsc_ccBox' id='securesubmit-card-expiry-year'>
           " . $years . "
           </select>
-          <div id='card_expMonth' class='error' style='color:#ff0000;display:none;'>" . __( 'Expiration month is invalid', 'wpsc' ) . "</div>
-          <div id='card_expYear' class='error' style='color:#ff0000;display:none;'>" . __( 'Expiration year is invalid', 'wpsc' ) . "</div>
+          <div id='card_expMonth' class='error' style='color:#ff0000;display:none;'>" . __('Expiration month is invalid', 'wpsc') . "</div>
+          <div id='card_expYear' class='error' style='color:#ff0000;display:none;'>" . __('Expiration year is invalid', 'wpsc') . "</div>
         </td>
       </tr>
       <tr>
-        <td>" . __( 'Security Code', 'wpsc' ) . "</td>
+        <td>" . __('Security Code', 'wpsc') . "</td>
         <td>
           <input type='text' size='4' maxlength='4' id='securesubmit-card-cvc'/>
           <input type='hidden' id='securesubmitToken' name='securesubmitToken' value='' />
@@ -322,7 +354,6 @@ if (in_array('wpe_securesubmit', (array)get_option('custom_gateway_options'))) {
       </tr>
     ";
 
-    $gateway_checkout_form_fields[$nzshpcrt_gateways[$num]['internalname']] = $output;
+    $gateway_checkout_form_fields[$nzshpcrt_gateways['wpe_securesubmit']['internalname']] = $output;
 
 }
-?>
