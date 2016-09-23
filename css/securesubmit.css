@@ -1,0 +1,249 @@
+/* ================================= */
+/* TABLE OF CONTENTS                 */
+/* ================================= */
+/* 1. BASIC LAYOUT                   */
+/* 2. INPUT FIELD & LABEL STYLES     */
+/* 3. CC-TYPE ICONS                  */
+/* 4. MEDIA QUERIES                  */
+/* ================================= */
+
+    /*//*//*/   /*//*//*/   /*//*//*/   /*/     /*/   /*//*//*/   /*//*//*/
+  /*/           /*/       /*/           /*/     /*/   /*/    /*/  /*/
+    /*//*/      /*//*/    /*/           /*/     /*/   /*/   /*/   /*//*/
+        /*/     /*/       /*/           /*/     /*/   /*//*/      /*/
+        /*/     /*/       /*/           /*/     /*/   /*/   /*/   /*/
+/*//*//*/       /*//*//*/   /*//*//*/     /*//*/      /*/     /*/ /*//*//*/
+
+
+    /*//*//*/   /*/     /*/  /*//*//*   /*/         /*/   /*/   /*//*//*//*//*/
+  /*/           /*/     /*/  /*/   /*/  /*//*/   /*//*/   /*/         /*/
+    /*//*/      /*/     /*/  /*/ /*/    /*/   /*/   /*/   /*/         /*/
+        /*/     /*/     /*/  /*/   /*/  /*/         /*/   /*/         /*/
+        /*/     /*/     /*/  /*/    /*/ /*/         /*/   /*/         /*/
+/*//*//*/         /*//*/     /*//*//*/  /*/         /*/   /*/         /*/
+
+
+/* ================================= */
+/* 1. BASIC LAYOUT                   */
+/* ================================= */
+
+
+
+.wpsc_gateway_container {
+  background-color:#ffffff !important;
+  padding:20px;
+}
+
+
+.ss-head
+{
+    background-color:#ffffff !important;
+    font-size:12px;
+    background-image:url('../images/ss-shield@2x.png');
+    background-size:372px 45px;
+    height:47px;
+    background-repeat:no-repeat;
+    margin:30px 0px;
+}
+
+#content input.wpsc_buy_button{
+  margin-top:50px !important;
+  background-color:#3989e3 !important;
+  color:#ffffff !important;
+  padding:10px 10px !important;
+  border:transparent !important;
+  border-radius:0px !important;
+}
+
+#content input.wpsc_buy_button:hover{
+  background-color:#205188;
+
+}
+
+
+
+
+
+/* ================================= */
+/* 2. INPUT FIELD & LABEL STYLES     */
+/* ================================= */
+
+
+#securesubmit-card-number {
+  background:#fff url('../images/ss-inputcard-blank@2x.png') center right no-repeat;
+  background-clip:padding-box;
+  width:95%;
+
+  background-size:51px 30px;
+  text-transform:uppercase;
+  height:41px;
+  border:1px solid #ccc;
+  border-radius:0px;
+  padding-left:10px;
+}
+
+.cc-number {
+  margin-bottom:10px;
+}
+
+.cc-input-label {
+  text-transform:uppercase;
+  background-color:#ffffff;
+  font-size:12px;
+  font-family:sans-serif;
+  text-align:left;
+  margin-bottom:5px;
+}
+
+
+
+#securesubmit-card-expiry {
+  width:90%;
+  height:41px;
+  border:1px solid #ccc;
+  border-radius:0px;
+  padding-left:10px;
+}
+
+.exp-date-input-label,
+.cvc-input-label {
+  text-transform:uppercase;
+  background-color:#ffffff;
+  font-size:12px;
+  font-family:sans-serif;
+  text-align:left;
+  margin-bottom:5px;
+}
+
+.exp-date,
+.cvc {
+  display: TABLE-CELL;
+  width:48%;
+  margin-bottom:10px;
+}
+
+.exp-date {
+  margin-right:9px;
+  float:left;
+}
+
+#securesubmit-card-cvc {
+  background:#fff url('../images/cvv1.png') center right no-repeat;
+  width:90%;
+  background-size:56px 35px;
+  height:41px;
+  border:1px solid #ccc;
+  border-radius:0px;
+  padding-left:10px;
+
+}
+
+.cvc {
+  padding-left:1%;
+  float:right;
+}
+
+
+
+/* ================================= */
+/* 3. CC-TYPE ICONS                  */
+/* ================================= */
+
+#securesubmit-card-number.card-type-visa {
+  background:#fff url('../images/ss-inputcard-visa@2x.png') center right no-repeat;
+  background-clip:padding-box;
+  background-size:60px 30px;
+}
+
+#securesubmit-card-number.card-type-mastercard {
+  background:#fff url('../images/ss-inputcard-mastercard@2x.png') center right no-repeat;
+  background-clip:padding-box;
+  background-size:55px 35px;
+}
+
+#securesubmit-card-number.card-type-discover {
+  background:#fff url('../images/ss-inputcard-discover@2x.png') center right no-repeat;
+  background-clip:padding-box;
+  background-size:51px 30px;
+}
+
+#securesubmit-card-number.card-type-jcb {
+  background:#fff url('../images/ss-inputcard-jcb@2x.png') center right no-repeat;
+  background-clip:padding-box;
+  background-size:51px 30px;
+}
+
+#securesubmit-card-number.card-type-amex {
+  background:#fff url('../images/ss-inputcard-amex@2x.png') center right no-repeat;
+  background-clip:padding-box;
+  background-size:45px 30px;
+}
+
+
+
+
+
+/* ================================= */
+/* MEDIA QUERIES                     */
+/* ================================= */
+
+@media (max-width:992px) {
+
+}
+
+@media (max-width:760px) {
+
+}
+
+@media only screen and (max-width: 580px) {
+
+  .exp-date,
+  .cvc {
+    display:block;
+    width:90%;
+    padding-left:0px;
+    margin-bottom:15px;
+  }
+
+  .cvc {
+    float:none;
+  }
+
+  .cvc-input-label {
+    display:table;
+  }
+
+  .cc-number {
+  margin-right:50px;
+  width:90%;
+  margin-bottom:65px;
+}
+
+  .ss-head  {
+      background-color:#ffffff !important;
+      font-size:12px;
+      background-image:url('../images/ss-shield@1x.png');
+      background-size:308px 38px;
+      height:70px;
+      width:300px;
+      background-repeat:no-repeat;
+      margin-top:20px;
+      margin-bottom:0px;
+  }
+
+#securesubmit-card-number {
+  width:90%;
+  float:left;
+}
+
+#securesubmit-card-expiry {
+  float:left;
+}
+
+#securesubmit-card-cvc {
+  float:left;
+}
+
+
+
+}
