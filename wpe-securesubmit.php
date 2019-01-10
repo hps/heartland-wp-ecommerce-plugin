@@ -127,7 +127,6 @@ class wpe_securesubmit extends wpsc_merchant {
             $this->set_error_message(__('There was an error posting your payment.', 'wpsc'));
             $this->return_to_checkout();
             exit();
-            break;
         }
     }
 }
