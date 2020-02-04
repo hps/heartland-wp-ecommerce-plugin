@@ -14,7 +14,8 @@
       }
     ],
     "require": {
-        "php": ">=5.2"
+        "php": ">=5.2",
+        "globalpayments/php-sdk": "^2.0"
     },
     "autoload":{
       "files": [
