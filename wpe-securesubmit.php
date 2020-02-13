@@ -87,16 +87,14 @@ class wpe_securesubmit extends wpsc_merchant {
         $hpstoken = new CreditCardData();
         $hpstoken->token = $_POST['securesubmitToken'];
         $hpstoken->cardHolderName = $this->cart_data['billing_address']['first_name'].$this->cart_data['billing_address']['last_name'];
-        //$cardHolder->emailAddress = $this->cart_data['email_address'];
         
         $hpsaddress = new Address();
         $hpsaddress->streetAddress1 = $this->cart_data['billing_address']['address'];
         $hpsaddress->city = $this->cart_data['billing_address']['city'];
         $hpsaddress->state = $this->cart_data['billing_address']['state'];
-        $hpsaddress->zip = preg_replace('/[^0-9]/', '', $this->cart_data['billing_address']['post_code']);
+        $hpsaddress->postalCode = preg_replace('/[^0-9]/', '', $this->cart_data['billing_address']['post_code']);
         $hpsaddress->country = $this->cart_data['billing_address']['country'];      
 
-        //$details = new TransactionSummary();
         $invoiceNumber = $this->cart_data['session_id'];
         $status = 'WP eCommerce Order Id: ' . $this->cart_data['session_id'];
 
