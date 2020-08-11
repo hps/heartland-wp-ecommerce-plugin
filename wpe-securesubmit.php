@@ -29,7 +29,7 @@ if (!class_exists('wpsc_merchant')) {
     require_once($wpscMerchantLocation);
 }
 
-if (!class_exists('HpsServicesConfig')) {
+if (!class_exists('ServicesConfig::class')) {
     require_once('library/vendor/autoload.php');
 }
 
@@ -82,8 +82,7 @@ class wpe_securesubmit extends wpsc_merchant {
 
     function submit() {
         $processing_mode = get_option("PROCESSING_MODE");
-        $chargeservice = $this->setConfig();
-        
+        $this->setConfig();
         $hpstoken = new CreditCardData();
         $hpstoken->token = $_POST['securesubmitToken'];
         $hpstoken->cardHolderName = $this->cart_data['billing_address']['first_name'].$this->cart_data['billing_address']['last_name'];
@@ -134,7 +133,7 @@ class wpe_securesubmit extends wpsc_merchant {
     {
         $config = new ServicesConfig();
         $config->secretApiKey = get_option("HPS_SECRET_KEY_LIVE") ? get_option("HPS_SECRET_KEY_LIVE") : get_option("HPS_SECRET_KEY_TEST");
-        $config->serviceUrl = "https://cert.api2.heartlandportico.com";
+		$config->serviceUrl = strpos($config->secretApiKey, 'prod') ? 'https://api2.heartlandportico.com' : 'https://cert.api2.heartlandportico.com';
         $service =  ServicesContainer::configure($config);
         return $service;    
     }

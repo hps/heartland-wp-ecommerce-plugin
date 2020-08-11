@@ -299,6 +299,16 @@ class PorticoConnector extends XmlGateway implements IPaymentGateway
                 );
                 $block1->appendChild($accountInfo);
             } else {
+                $accountInfo = $xml->createElement('AccountInfo');
+                $accountInfo->appendChild($xml->createElement('CheckNumber', $builder->paymentMethod->checkNumber));
+                $accountInfo->appendChild($xml->createElement('MICRData', $builder->paymentMethod->micrNumber));
+                $accountInfo->appendChild(
+                    $xml->createElement(
+                        'AccountType',
+                        $this->hydrateAccountType($builder->paymentMethod->accountType)
+                    )
+                );
+                $block1->appendChild($accountInfo);
                 $block1->appendChild($xml->createElement('TokenValue', $builder->paymentMethod->token));
             }
 
@@ -471,6 +481,7 @@ class PorticoConnector extends XmlGateway implements IPaymentGateway
         }
 
         $transaction->appendChild($block1);
+
         $response = $this->doTransaction($this->buildEnvelope($xml, $transaction));
         return $this->mapResponse($response, $builder, $this->buildEnvelope($xml, $transaction));
     }

@@ -4,12 +4,8 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit172c339abc8835fbbd9051d2ff74f98f
+class ComposerStaticInitb8c779404af209cada21284ce088aae1
 {
-    public static $files = array (
-        '29dcf963a6d0c4aef8ac9c2a684f5df2' => __DIR__ . '/../..' . '/Hps.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
         'G' => 
         array (
@@ -27,8 +23,8 @@ class ComposerStaticInit172c339abc8835fbbd9051d2ff74f98f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit172c339abc8835fbbd9051d2ff74f98f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit172c339abc8835fbbd9051d2ff74f98f::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb8c779404af209cada21284ce088aae1::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb8c779404af209cada21284ce088aae1::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

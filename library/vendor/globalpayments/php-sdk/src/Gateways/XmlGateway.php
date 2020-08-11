@@ -19,8 +19,8 @@ abstract class XmlGateway extends Gateway
      */
     protected function doTransaction($request)
     {
-
         $response = $this->sendRequest('POST', '', $request);
+
         if (200 !== $response->statusCode) {
             throw new GatewayException(
                 sprintf(
