@@ -29,8 +29,8 @@ if (!class_exists('wpsc_merchant')) {
     require_once($wpscMerchantLocation);
 }
 
-if (!class_exists('HpsServicesConfig')) {
-    require_once('library/Hps.php');
+if (!class_exists('ServicesConfig::class')) {
+    require_once('library/vendor/autoload.php');
 }
 
 $nzshpcrt_gateways['wpe_securesubmit'] = array(
@@ -48,6 +48,15 @@ $nzshpcrt_gateways['wpe_securesubmit'] = array(
 
 $error = '';
 
+use GlobalPayments\Api\Entities\EncryptionData;
+use GlobalPayments\Api\PaymentMethods\CreditCardData;
+use GlobalPayments\Api\PaymentMethods\CreditTrackData;
+use GlobalPayments\Api\Services\CreditService;
+use GlobalPayments\Api\ServicesConfig;
+use GlobalPayments\Api\ServicesContainer;
+use GlobalPayments\Api\Entities\Address;
+use GlobalPayments\Api\Entities\Customer;
+use GlobalPayments\Api\Entities\Reporting\TransactionSummary;
 /**
  * WP eCommerce Secure Submit Class
  *
@@ -73,51 +82,40 @@ class wpe_securesubmit extends wpsc_merchant {
 
     function submit() {
         $processing_mode = get_option("PROCESSING_MODE");
-        $config = new HpsServicesConfig();
-
-        $config->secretApiKey = get_option("HPS_SECRET_KEY_LIVE") ? get_option("HPS_SECRET_KEY_LIVE") : get_option("HPS_SECRET_KEY_TEST");
-        $config->versionNumber = '1645';
-        $config->developerId = '002914';
-
-        $chargeService = new HpsCreditService($config);
-
-        $hpsaddress = new HpsAddress();
-        $hpsaddress->address = $this->cart_data['billing_address']['address'];
+        $this->setConfig();
+        $hpstoken = new CreditCardData();
+        $hpstoken->token = $_POST['securesubmitToken'];
+        $hpstoken->cardHolderName = $this->cart_data['billing_address']['first_name'].$this->cart_data['billing_address']['last_name'];
+        
+        $hpsaddress = new Address();
+        $hpsaddress->streetAddress1 = $this->cart_data['billing_address']['address'];
         $hpsaddress->city = $this->cart_data['billing_address']['city'];
         $hpsaddress->state = $this->cart_data['billing_address']['state'];
-        $hpsaddress->zip = preg_replace('/[^0-9]/', '', $this->cart_data['billing_address']['post_code']);
-        $hpsaddress->country = $this->cart_data['billing_address']['country'];
+        $hpsaddress->postalCode = preg_replace('/[^0-9]/', '', $this->cart_data['billing_address']['post_code']);
+        $hpsaddress->country = $this->cart_data['billing_address']['country'];      
 
-        $cardHolder = new HpsCardHolder();
-        $cardHolder->firstName = $this->cart_data['billing_address']['first_name'];
-        $cardHolder->lastName = $this->cart_data['billing_address']['last_name'];
-        $cardHolder->emailAddress = $this->cart_data['email_address'];
-        $cardHolder->address = $hpsaddress;
-
-        $hpstoken = new HpsTokenData();
-        $hpstoken->tokenValue = $_POST['securesubmitToken'];
-
-        $details = new HpsTransactionDetails();
-        $details->invoiceNumber = $this->cart_data['session_id'];
-        $details->memo = 'WP eCommerce Order Id: ' . $this->cart_data['session_id'];
+        $invoiceNumber = $this->cart_data['session_id'];
+        $status = 'WP eCommerce Order Id: ' . $this->cart_data['session_id'];
 
         try {
+           
             if ($processing_mode == 'capture') {
-                $response = $chargeService->charge(
-                    $this->cart_data['total_price'],
-                    'usd',
-                    $hpstoken,
-                    $cardHolder,
-                    false,
-                    $details);
+                $response = $hpstoken->charge($this->cart_data['total_price'])
+                ->withCurrency('USD')
+                ->withAddress($hpsaddress)
+                ->withAllowDuplicates(true)
+                ->withInvoiceNumber($invoiceNumber)
+                ->withDescription($status)
+                ->execute();
             } else {
-                $response = $chargeService->authorize(
-                    $this->cart_data['total_price'],
-                    'usd',
-                    $hpstoken,
-                    $cardHolder,
-                    false,
-                    $details);
+                $response = $hpstoken->authorize($this->cart_data['total_price'])
+                ->withCurrency('USD')
+                ->withAddress($hpsaddress)
+                ->withAmountEstimated($this->cart_data['total_price'])
+                ->withInvoiceNumber($invoiceNumber)
+                ->withDescription($status)
+                ->withAllowDuplicates(true)
+                ->execute();
             }
 
             $this->set_authcode($response->authorizationCode);
@@ -126,10 +124,22 @@ class wpe_securesubmit extends wpsc_merchant {
         } catch (Exception $e) {
             $this->set_error_message(__('There was an error posting your payment.', 'wpsc'));
             $this->return_to_checkout();
+            
             exit();
         }
     }
+    
+    public function setConfig()
+    {
+        $config = new ServicesConfig();
+        $config->secretApiKey = get_option("HPS_SECRET_KEY_LIVE") ? get_option("HPS_SECRET_KEY_LIVE") : get_option("HPS_SECRET_KEY_TEST");
+		$config->serviceUrl = strpos($config->secretApiKey, 'prod') ? 'https://api2.heartlandportico.com' : 'https://cert.api2.heartlandportico.com';
+        $service =  ServicesContainer::configure($config);
+        return $service;    
+    }
 }
+
+
 
 function submit_securesubmit() {
 
@@ -223,7 +233,7 @@ function form_securesubmit() {
       </tr>
       <tr>
         <td>
-          <label for="HPS_PUBLIC_KEY_LIVE">' . __('Live - Public Key:', 'wpsc') . '</label>
+            <label for="HPS_PUBLIC_KEY_LIVE">' . __('Live - Public Key:', 'wpsc') . '</label>
         </td>
         <td>
           <input type="text" name="SecureSubmit[HPS_PUBLIC_KEY_LIVE]" id="HPS_PUBLIC_KEY_LIVE" value="' . get_option("HPS_PUBLIC_KEY_LIVE") . '" size="30" style="width:500px;"/>
