@@ -1,6 +1,6 @@
 ## Hps
 
-This PHP SDK makes it easy to process payments against the Heartland Payment Systems Portico Gateway.
+This PHP SDK makes it easy to process payments against the Global Payments Payment Systems Portico Gateway.
 
 ## Installation
 

@@ -1,6 +1,6 @@
 ## SecureSubmit WP e-Commerce Payment Gateway
 
-This extension allows WordPress WP e-Commerce cart to use the Heartland Payment Systems Gateway. All card data is tokenized using Heartland's SecureSubmit product.
+This extension allows WordPress WP e-Commerce cart to use the Global Payments Systems Gateway. All card data is tokenized using Global Payments's SecureSubmit product.
 
 ## Installation
 
