@@ -2,7 +2,7 @@
 /*
 Plugin Name: Global Payments Secure Submit Gateway for WP eCommerce
 Plugin URI: https://developer.heartlandpaymentsystems.com/SecureSubmit/
-Description: Global Payments Systems gateway for WP eCommerce.
+Description: Global Payments gateway for WP eCommerce.
 Version: 1.0.0
 Author: Secure Submit
 Author URI: https://developer.heartlandpaymentsystems.com/SecureSubmit/
@@ -56,7 +56,7 @@ $error = '';
  * @package wpe_securesubmit
  * @since 3.7.6
  * @subpackage wpsc-merchants
- * @author Global Payments Systems
+ * @author Global Payments
  */
 
 class wpe_securesubmit extends wpsc_merchant {

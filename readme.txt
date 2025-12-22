@@ -6,7 +6,7 @@ Stable tag: trunk
 License: Custom
 License URI: https://github.com/hps/heartland-wp-ecommerce-plugin/blob/master/LICENSE
 
-Secure Submit allows merchants to take PCI-Friendly Credit Card payments on WP eCommerce using Global Payments Systems Payment Gateway.
+Secure Submit allows merchants to take PCI-Friendly Credit Card payments on WP eCommerce using Global Payments Payment Gateway.
 
 == Description ==
 
@@ -21,7 +21,7 @@ Features of Secure Submit:
 
 == Installation ==
 
-After you have installed and configured the main WP eCommerce plugin use the following steps to install the Global Payments Systems Gateway addon:
+After you have installed and configured the main WP eCommerce plugin use the following steps to install the Global Payments Gateway addon:
 1. In your WordPress admin, go to Plugins > Add New and search for "WP eCommerce Secure Submit".
 2. Click Install, once installed click Activate.
 3. Configure and Enable the gateway in WP eCommerce by adding your public and secret Api Keys.

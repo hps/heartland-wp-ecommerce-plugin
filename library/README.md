@@ -1,6 +1,6 @@
 ## Hps
 
-This PHP SDK makes it easy to process payments against the Global Payments Systems Portico Gateway.
+This PHP SDK makes it easy to process payments against the Global Payments Portico Gateway.
 
 ## Installation
 
