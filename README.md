@@ -1,4 +1,6 @@
 # **This repository is no longer maintained.**
+Our Globalpayments WP e-Commerce Plugin can be found <a href="https://github.com/globalpayments/globalpayments-wp-ecommerce-plugin" target="_blank">here</a>
+
 ## SecureSubmit WP e-Commerce Payment Gateway
 
 This extension allows WordPress WP e-Commerce cart to use the Global Payments Gateway. All card data is tokenized using Global Payments's SecureSubmit product.

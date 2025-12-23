@@ -10,7 +10,7 @@ Secure Submit allows merchants to take PCI-Friendly Credit Card payments on WP e
 
 == Description ==
 
-This plugin provides a Global Payments Payment Systems Gatway addon to the WP eCommerce plugin using our Secure Submit card tokenization library.
+This plugin provides a Global Payments Payment Gatway addon to the WP eCommerce plugin using our Secure Submit card tokenization library.
 
 Features of Secure Submit:
 
