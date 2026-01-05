@@ -2,12 +2,12 @@ Online Privacy & Cookie Policy Statement ("Privacy Policy")
 
 Last modified on June 21, 2012
 
-Global Payments, Inc. (�Global Payments,� �we,� �us,� �our�) recognizes the importance of maintaining effective privacy practices.  This Privacy & Cookie Policy explains the online data collection and use policies that apply to the websites, mobile applications and online services (collectively �Services�) that are owned or controlled by Global Payments and are linked to this Policy page.
+Global Payments, Inc. ("Global Payments," "we," "us," "our") recognizes the importance of maintaining effective privacy practices.  This Privacy & Cookie Policy explains the online data collection and use policies that apply to the websites, mobile applications and online services (collectively "Services") that are owned or controlled by Global Payments and are linked to this Policy page.
 Click below to jump to a particular topic:
 
 1.       Information Collection and Use
 2.       Sharing of Information
-3.       Children�s Privacy
+3.       Children's Privacy
 4.       Your Choices
 5.       Data Protection and Storage
 6.       Third-Party Websites and Services
@@ -21,7 +21,7 @@ Information that you provide to us:  We collect information that you provide to 
  
 Information collected from third parties:  We may collect information about you or your business from third parties in the course of providing our Services to you.  For example, we may obtain information from our merchant customersor we may collect information from a school or university about consumer/students to provide services to those consumer/student.  For some services,we may also collect information from third parties, such as credit reporting agencies or financial institutions, or other entities with information pertaining to the Services that we are providing to you. 
  
-Information collected through technology:  When you visit our websites or mobile applications (or when you use any of our online services) we may collect certain information about your computer or device through technology such as cookies, web beacons, or other tracking/recording tools.  The information collected may include, but is not limited to, IP addresses, referring URLs, access times, browser types, device types, mobile device identifiers, or information about your interactions with our websites, applications or services.  (Note that a �cookie� is a text file placed on a computer�s hard drive or stored on a mobile device; a �web beacon,� also known as an Internet tag, pixel tag or clear GIF, is used to transmit information back to a web server.)  We may use the information described in this paragraph to, among other things, (i) operate our Services, including by remembering information so that you will not have to re-enter it during your visit or the next time you sign in to your account, (ii) identify and protect our customers, (iii) control unauthorized use or abuse of our Services, (iv) provide custom, personalized content and information, which could include advertising, (v) monitor aggregate traffic patterns on our websites and services, and (vi) analyze and improve our Services.  
+Information collected through technology:  When you visit our websites or mobile applications (or when you use any of our online services) we may collect certain information about your computer or device through technology such as cookies, web beacons, or other tracking/recording tools.  The information collected may include, but is not limited to, IP addresses, referring URLs, access times, browser types, device types, mobile device identifiers, or information about your interactions with our websites, applications or services.  (Note that a "cookie" is a text file placed on a computer's hard drive or stored on a mobile device; a "web beacon," also known as an Internet tag, pixel tag or clear GIF, is used to transmit information back to a web server.)  We may use the information described in this paragraph to, among other things, (i) operate our Services, including by remembering information so that you will not have to re-enter it during your visit or the next time you sign in to your account, (ii) identify and protect our customers, (iii) control unauthorized use or abuse of our Services, (iv) provide custom, personalized content and information, which could include advertising, (v) monitor aggregate traffic patterns on our websites and services, and (vi) analyze and improve our Services.  
 
 2.   Sharing of Information
 
@@ -30,17 +30,17 @@ We may share your information with our service providers and business partners (
 We may aggregate, or strip information of personally identifying characteristics, and may share that aggregated or anonymized information with third parties.
 We may share or disclose your information if we determine, in our sole discretion, that we are required to do so under applicable law or regulatory requirements, or if we reasonably believe disclosure is necessary to prevent harm or financial loss, or in connection with preventing fraud or illegal activity, and/or to enforce our Terms of Use.
 We reserve the right to transfer any information we collect in the event we sell or transfer all or a portion of our business or assets (including any shares in the company) or any portion or combination of our products, services, businesses and/or assets.  Should such a transaction occur (whether a divestiture, merger, acquisition, bankruptcy, dissolution, reorganization, liquidation, or similar transaction or proceeding), we will use reasonable efforts to ensure that any transferred information is treated in a manner consistent with this Privacy Policy.
-3.   Children�s Privacy
+3.   Children's Privacy
 
-Global Payment�s websites, mobile applications and services are intended for use strictly by adults.  Global Payments does not knowingly solicit or collect personal information from children under the age of 13.  If Global Payments obtains knowledge that it has collected personal information from a child under 13 in retrievable form in its files, Global Payments will delete that information.
+Global Payment's websites, mobile applications and services are intended for use strictly by adults.  Global Payments does not knowingly solicit or collect personal information from children under the age of 13.  If Global Payments obtains knowledge that it has collected personal information from a child under 13 in retrievable form in its files, Global Payments will delete that information.
 
 4.   Your Choices
 
-Email Communications.  From time to time, we may send you emails regarding updates to our websites, mobile applications or products/services, notices about our organization, or information about products/services we offer (or promotional offers from third parties) that we think may be of interest to you.  If you wish to unsubscribe from such emails, simply click the �unsubscribe link� provided at the bottom of the email communication.  Note that you cannot unsubscribe from certain Services-related email communications (e.g., account verification, confirmations of transactions, technical or legal notices).
+Email Communications.  From time to time, we may send you emails regarding updates to our websites, mobile applications or products/services, notices about our organization, or information about products/services we offer (or promotional offers from third parties) that we think may be of interest to you.  If you wish to unsubscribe from such emails, simply click the "unsubscribe link" provided at the bottom of the email communication.  Note that you cannot unsubscribe from certain Services-related email communications (e.g., account verification, confirmations of transactions, technical or legal notices).
 
-Modifying Account Information.  If you have an online account with us, you may have the ability to modify certain information in your account (e.g., your contact information) through �profile,� �account,� �settings,� or �preferences� options provided on the website or service.  If you have any questions about modifying or updating any information in your account, please contact us at the email address, postal address, or telephone number provided below. 
+Modifying Account Information.  If you have an online account with us, you may have the ability to modify certain information in your account (e.g., your contact information) through "profile," "account," "settings," or "preferences" options provided on the website or service.  If you have any questions about modifying or updating any information in your account, please contact us at the email address, postal address, or telephone number provided below. 
 
-Cookie Controls.  You may be able to set your Internet browser or mobile device to block cookies or other tracking/recording tools, including cookies associated with our websites or Services, or to indicate when a cookie is being set by us. However, it is important to remember that many of our websites or Services may not function properly if your cookies are disabled.  For information and instructions about how to manage your cookies, refer to your Internet browser�s or mobile device�s technical information.  Further information on how to adjust your cookie preferences through your browser is available at the external, third-party informational website www.allaboutcookies.org.
+Cookie Controls.  You may be able to set your Internet browser or mobile device to block cookies or other tracking/recording tools, including cookies associated with our websites or Services, or to indicate when a cookie is being set by us. However, it is important to remember that many of our websites or Services may not function properly if your cookies are disabled.  For information and instructions about how to manage your cookies, refer to your Internet browser's or mobile device's technical information.  Further information on how to adjust your cookie preferences through your browser is available at the external, third-party informational website www.allaboutcookies.org.
  
 5.   Data Protection and Storage
 
@@ -50,11 +50,11 @@ We may store and process information in the United States or any other country i
 
 6.   Third-Party Websites and Services
 
-Our websites or Services may provide links to (or links from) third-party websites or services � none of which are governed by this Privacy Policy.  To the extent that any linked third-party websites or services you visit are not owned or controlled by Global Payments, we are not responsible for those websites� or services� content or information practices.  We strongly encourage you to review the privacy policies of any site or service before providing any personal information.
+Our websites or Services may provide links to (or links from) third-party websites or services — none of which are governed by this Privacy Policy.  To the extent that any linked third-party websites or services you visit are not owned or controlled by Global Payments, we are not responsible for those websites' or services' content or information practices.  We strongly encourage you to review the privacy policies of any site or service before providing any personal information.
 
 7.   Changes to Privacy Policy
 
-We reserve the right to change this Privacy Policy from time to time in our sole discretion.  We will post changes on this page and indicate the �last modified� date at the top of this page.  Please check back often for any updates.  Your continued use of our website, mobile application or services after any change in this Privacy Policy will constitute your acceptance of such change.
+We reserve the right to change this Privacy Policy from time to time in our sole discretion.  We will post changes on this page and indicate the "last modified" date at the top of this page.  Please check back often for any updates.  Your continued use of our website, mobile application or services after any change in this Privacy Policy will constitute your acceptance of such change.
 
 8.   Contact Us
 
