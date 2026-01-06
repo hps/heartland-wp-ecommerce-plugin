@@ -1,16 +1,16 @@
-=== Heartland Secure Submit Gateway for WP eCommerce ===
+=== Global Payments Secure Submit Gateway for WP eCommerce ===
 Contributors: markhagan
-Tags: wp ecommerce, wpsc, commerce, heartland, payment, systems, gateway, token, tokenize, save cards
+Tags: wp ecommerce, wpsc, commerce, Global Payments, payment, systems, gateway, token, tokenize, save cards
 Tested up to: 4.5
 Stable tag: trunk
 License: Custom
 License URI: https://github.com/hps/heartland-wp-ecommerce-plugin/blob/master/LICENSE
 
-Secure Submit allows merchants to take PCI-Friendly Credit Card payments on WP eCommerce using Heartland Payment Systems Payment Gateway.
+Secure Submit allows merchants to take PCI-Friendly Credit Card payments on WP eCommerce using Global Payments Payment Gateway.
 
 == Description ==
 
-This plugin provides a Heartland Payment Systems Gatway addon to the WP eCommerce plugin using our Secure Submit card tokenization library.
+This plugin provides a Global Payments Payment Gatway addon to the WP eCommerce plugin using our Secure Submit card tokenization library.
 
 Features of Secure Submit:
 
@@ -21,7 +21,7 @@ Features of Secure Submit:
 
 == Installation ==
 
-After you have installed and configured the main WP eCommerce plugin use the following steps to install the Heartland Payment Systems Gateway addon:
+After you have installed and configured the main WP eCommerce plugin use the following steps to install the Global Payments Gateway addon:
 1. In your WordPress admin, go to Plugins > Add New and search for "WP eCommerce Secure Submit".
 2. Click Install, once installed click Activate.
 3. Configure and Enable the gateway in WP eCommerce by adding your public and secret Api Keys.
