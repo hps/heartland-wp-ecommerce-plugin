@@ -1,5 +1,4 @@
 # **This repository is no longer maintained.**
-Our Globalpayments WP e-Commerce Plugin can be found <a href="https://github.com/globalpayments/globalpayments-wp-ecommerce-plugin" target="_blank">here</a>
 
 ## SecureSubmit WP e-Commerce Payment Gateway
 
